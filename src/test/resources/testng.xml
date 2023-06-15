@@ -3,7 +3,7 @@
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="C:/Users/drago/IdeaProjects/wildberries-selenid-test/src/test">
         <classes>
-            <class name="tests.WildberriesTest">
+            <class name="tests.AvitoTest">
                 <methods>
                     <include name="findProduct"/>
                 </methods>
