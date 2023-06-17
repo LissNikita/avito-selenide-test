@@ -19,16 +19,20 @@ public class AvitoTest extends BaseTest {
 
         $(By.xpath("//label"))
                 .sendKeys("Audi", Keys.ENTER);
-        $(By.xpath("//h1[@class='page-title-text-tSffu page-title-inline-zBPFx']")).shouldHave(text("Купить Audi"));
-
+        $(By.xpath("//h1[@class='page-title-text-tSffu page-title-inline-zBPFx']"))
+                .shouldHave(text("Купить Audi"));
     }
 
     @Test
     public void checkModelOfCars() {
         findAudiCars();
-        $(By.xpath("//span[contains(text(), 'Модель')]//following::span[contains(text(), 'Любая')]")).scrollTo().click();
+        $(By.xpath("//span[contains(text(), 'Модель')]//following::span[contains(text(), 'Любая')]"))
+                .scrollTo()
+                .click();
 
-        $(By.xpath("//p[text() = 'A4']")).scrollTo().click();
+        $(By.xpath("//p[text() = 'A4']"))
+                .scrollTo()
+                .click();
         $(By.xpath("//div[@class = 'styles-gapContainer-_bE0D']"))
                .shouldBe(visible);
     }
@@ -36,8 +40,13 @@ public class AvitoTest extends BaseTest {
     @Test
     public void selectFourWheelDriveCars(){
         findAudiCars();
-        $(By.xpath("//li[@title = 'полный']")).scrollTo().click();
-        $(By.xpath("//button[@data-marker = 'search-filters/submit-button']")).click();
-        $(By.xpath("//h1[@class = 'page-title-text-tSffu page-title-inline-zBPFx']")).scrollTo().shouldHave(text(": полный привод"));
+        $(By.xpath("//li[@title = 'полный']"))
+                .scrollTo()
+                .click();
+        $(By.xpath("//button[@data-marker = 'search-filters/submit-button']"))
+                .click();
+        $(By.xpath("//h1[@class = 'page-title-text-tSffu page-title-inline-zBPFx']"))
+                .scrollTo()
+                .shouldHave(text(": полный привод"));
     }
 }
