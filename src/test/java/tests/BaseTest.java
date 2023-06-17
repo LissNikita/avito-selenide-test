@@ -6,6 +6,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.wildberries.utils.PropertyReader;
 
 import static com.codeborne.selenide.Selenide.open;
 
@@ -22,7 +23,7 @@ abstract public class BaseTest {
 
     @BeforeMethod
     public void init() {
-        open("https://www.avito.ru/");
+        open(PropertyReader.getPropertyValue("URL"));
         setUp();
     }
 
