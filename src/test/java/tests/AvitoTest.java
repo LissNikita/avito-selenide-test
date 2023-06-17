@@ -1,8 +1,8 @@
 package tests;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Condition.text;
@@ -10,13 +10,13 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
+@Log4j2
 public class AvitoTest extends BaseTest {
 
     @Test
     public void findAudiCars() {
 
-        open("https://www.avito.ru/");
-
+        log.info("Find Audi cars");
         $(By.xpath("//label"))
                 .sendKeys("Audi", Keys.ENTER);
         $(By.xpath("//h1[@class='page-title-text-tSffu page-title-inline-zBPFx']"))
@@ -25,6 +25,8 @@ public class AvitoTest extends BaseTest {
 
     @Test
     public void checkModelOfCars() {
+
+        log.info("Check model of cars 'A4'");
         findAudiCars();
         $(By.xpath("//span[contains(text(), 'Модель')]//following::span[contains(text(), 'Любая')]"))
                 .scrollTo()
@@ -34,11 +36,13 @@ public class AvitoTest extends BaseTest {
                 .scrollTo()
                 .click();
         $(By.xpath("//div[@class = 'styles-gapContainer-_bE0D']"))
-               .shouldBe(visible);
+                .shouldBe(visible);
     }
 
     @Test
-    public void selectFourWheelDriveCars(){
+    public void selectFourWheelDriveCars() {
+
+        log.info("Select four wheel driver cars");
         findAudiCars();
         $(By.xpath("//li[@title = 'полный']"))
                 .scrollTo()
