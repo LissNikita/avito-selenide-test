@@ -1,15 +1,15 @@
 package tests;
 
 import lombok.extern.log4j.Log4j2;
+import org.avito.utils.JsonReader;
+import org.avito.utils.RetryUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
-import org.wildberries.utils.RetryUtils;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 
 @Log4j2
 public class AvitoTest extends BaseTest {

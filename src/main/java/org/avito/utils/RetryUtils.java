@@ -1,4 +1,4 @@
-package org.wildberries.utils;
+package org.avito.utils;
 
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;

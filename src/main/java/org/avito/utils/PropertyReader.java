@@ -1,4 +1,4 @@
-package org.wildberries.utils;
+package org.avito.utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;

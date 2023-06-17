@@ -6,7 +6,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.wildberries.utils.PropertyReader;
+import org.avito.utils.PropertyReader;
 
 import static com.codeborne.selenide.Selenide.open;
 
