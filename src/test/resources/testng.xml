@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
-
-    <test name="Avito Tests">
+    <test verbose="2" preserve-order="true" name="C:/Users/drago/IdeaProjects/wildberries-selenid-test/src/test">
         <classes>
             <class name="tests.AvitoTest">
                 <methods>
-                    <include name="findAudiCars"/>
-                    <include name="checkModelOfCars"/>
-                    <include name="selectFourWheelDriveCars"/>
+                    <include name="findProduct"/>
                 </methods>
             </class>
         </classes>
