@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
+import org.wildberries.utils.RetryUtils;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -13,7 +14,7 @@ import static com.codeborne.selenide.Selenide.open;
 @Log4j2
 public class AvitoTest extends BaseTest {
 
-    @Test
+    @Test(retryAnalyzer = RetryUtils.class)
     public void findAudiCars() {
 
         log.info("Find Audi cars");
@@ -23,7 +24,7 @@ public class AvitoTest extends BaseTest {
                 .shouldHave(text("Купить Audi"));
     }
 
-    @Test
+    @Test(retryAnalyzer = RetryUtils.class)
     public void checkModelOfCars() {
 
         log.info("Check model of cars 'A4'");
@@ -39,7 +40,7 @@ public class AvitoTest extends BaseTest {
                 .shouldBe(visible);
     }
 
-    @Test
+    @Test(retryAnalyzer = RetryUtils.class)
     public void selectFourWheelDriveCars() {
 
         log.info("Select four wheel driver cars");
