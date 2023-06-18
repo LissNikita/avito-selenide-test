@@ -7,8 +7,6 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class AudiSelectionPage {
 
-    public SelenideElement title = $(By.xpath("//h1[@class='page-title-text-tSffu page-title-inline-zBPFx']"));
-
     public SelenideElement modelOfCar = $(By.xpath("//span[contains(text(), 'Модель')]//following::span[contains(text(), 'Любая')]"));
 
     public SelenideElement checkBoxModel = $(By.xpath("//p[text() = 'A4']"));

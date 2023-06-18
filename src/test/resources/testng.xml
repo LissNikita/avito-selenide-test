@@ -6,8 +6,9 @@
             <class name="tests.AvitoTest">
                 <methods>
                     <include name="findAudiCars"/>
-                    <include name="checkModelOfCars"/>
-                    <include name="selectFourWheelDriveCars"/>
+                    <include name="checkingModelOfCars"/>
+                    <include name="checkingSelectionFourWheelDriveCars"/>
+                    <include name="checkingSelectionOfManShoes"/>
                 </methods>
             </class>
         </classes>

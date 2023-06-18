@@ -29,12 +29,12 @@ public class AvitoTest extends BaseTest {
         log.info("Find Audi cars");
         mainPage.searchForm
                 .sendKeys("Audi", Keys.ENTER);
-        audiSelectionPage.title
+        mainPage.title
                 .shouldHave(text("Купить Audi"));
     }
 
     @Test(retryAnalyzer = RetryUtils.class)
-    public void checkModelOfCars() {
+    public void checkingModelOfCars() {
 
         log.info("Check model of cars 'A4'");
         findAudiCars();
@@ -49,7 +49,7 @@ public class AvitoTest extends BaseTest {
     }
 
     @Test(retryAnalyzer = RetryUtils.class)
-    public void selectFourWheelDriveCars() {
+    public void checkingSelectionFourWheelDriveCars() {
 
         log.info("Select four wheel driver cars");
         findAudiCars();
@@ -58,8 +58,22 @@ public class AvitoTest extends BaseTest {
                 .click();
         audiSelectionPage.buttonFilterSearch
                 .click();
-        audiSelectionPage.title
+        mainPage.title
                 .scrollTo()
                 .shouldHave(text(": полный привод"));
+    }
+
+    @Test(retryAnalyzer = RetryUtils.class)
+    public void checkingSelectionOfManShoes(){
+
+        log.info("Checking selection of man shoes");
+        mainPage.buttonAllCategories
+                .click();
+        mainPage.columnPersonalThings
+                .click();
+        mainPage.buttonManShoes
+                .click();
+        mainPage.title
+                .shouldHave(text("Мужская обувь"));
     }
 }
