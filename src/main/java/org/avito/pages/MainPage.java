@@ -1,19 +1,22 @@
 package org.avito.pages;
 
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class MainPage {
 
-    public SelenideElement title = $(By.xpath("//h1[@class='page-title-text-tSffu page-title-inline-zBPFx']"));
+    public SelenideElement title = $x("//h1[@class='page-title-text-tSffu page-title-inline-zBPFx']");
 
-    public SelenideElement searchForm = $(By.xpath("//label"));
+    public SelenideElement searchForm = $x("//label");
 
-    public SelenideElement buttonAllCategories = $(By.xpath("//button[@data-marker = 'top-rubricator/all-categories']"));
+    public SelenideElement buttonAllCategories = $x("//button[@data-marker = 'top-rubricator/all-categories']");
 
-    public SelenideElement columnPersonalThings = $(By.xpath("//p[text() = 'Личные вещи']"));
+    public SelenideElement columnPersonalThings = $x("//p[text() = 'Личные вещи']");
 
-    public SelenideElement buttonManShoes = $(By.xpath("//a[@data-name = 'Мужская обувь']"));
+    public SelenideElement buttonManShoes = $x("//a[@data-name = 'Мужская обувь']");
+
+    public SelenideElement loginButton = $x("//a[@class = 'index-nav-link-muv1u index-login-NV2z_']");
+
+    public SelenideElement buttonStories = $x("//div[@data-id = '984']");
 }

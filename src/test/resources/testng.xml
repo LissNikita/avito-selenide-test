@@ -9,6 +9,7 @@
                     <include name="checkingModelOfCars"/>
                     <include name="checkingSelectionFourWheelDriveCars"/>
                     <include name="checkingSelectionOfManShoes"/>
+                    <include name="checkBotProtection"/>
                 </methods>
             </class>
         </classes>

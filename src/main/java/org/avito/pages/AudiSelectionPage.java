@@ -1,19 +1,18 @@
 package org.avito.pages;
 
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class AudiSelectionPage {
 
-    public SelenideElement modelOfCar = $(By.xpath("//span[contains(text(), 'Модель')]//following::span[contains(text(), 'Любая')]"));
+    public SelenideElement modelOfCar = $x("//span[contains(text(), 'Модель')]//following::span[contains(text(), 'Любая')]");
 
-    public SelenideElement checkBoxModel = $(By.xpath("//p[text() = 'A4']"));
+    public SelenideElement checkBoxModel = $x("//p[text() = 'A4']");
 
-    public SelenideElement containerWithModels = $(By.xpath("//div[@class = 'styles-gapContainer-_bE0D']"));
+    public SelenideElement containerWithModels = $x("//div[@class = 'styles-gapContainer-_bE0D']");
 
-    public SelenideElement buttonDriveOfCar = $(By.xpath("//li[@title = 'полный']"));
+    public SelenideElement buttonDriveOfCar = $x("//li[@title = 'полный']");
 
-    public SelenideElement buttonFilterSearch = $(By.xpath("//button[@data-marker = 'search-filters/submit-button']"));
+    public SelenideElement buttonFilterSearch = $x("//button[@data-marker = 'search-filters/submit-button']");
 }
