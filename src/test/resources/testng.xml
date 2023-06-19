@@ -10,6 +10,7 @@
                     <include name="checkingSelectionFourWheelDriveCars"/>
                     <include name="checkingSelectionOfManShoes"/>
                     <include name="checkBotProtection"/>
+                    <include name="checkingSelectionOfManShoes"/>
                 </methods>
             </class>
         </classes>

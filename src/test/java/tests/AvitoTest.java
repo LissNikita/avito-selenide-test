@@ -4,7 +4,9 @@ import lombok.extern.log4j.Log4j2;
 import org.avito.pages.AudiSelectionPage;
 import org.avito.pages.AuthorizationPage;
 import org.avito.pages.MainPage;
+import org.avito.pages.StoriesPage;
 import org.avito.utils.RetryUtils;
+import org.avito.utils.WaitUtils;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -18,12 +20,14 @@ public class AvitoTest extends BaseTest {
     private MainPage mainPage;
     private AudiSelectionPage audiSelectionPage;
     private AuthorizationPage authorizationPage;
+    private StoriesPage storiesPage;
 
     @BeforeClass
     public void startPage() {
         mainPage = new MainPage();
         audiSelectionPage = new AudiSelectionPage();
         authorizationPage = new AuthorizationPage();
+        storiesPage = new StoriesPage();
     }
 
     @Test(retryAnalyzer = RetryUtils.class)
@@ -97,4 +101,14 @@ public class AvitoTest extends BaseTest {
                 .shouldHave(text("Укажите мобильный телефон"));
     }
 
+    @Test(retryAnalyzer = RetryUtils.class)
+    public void checkSwitchingStories(){
+        log.info("Сhecking switching between stories");
+
+        mainPage.buttonStories
+                .click();
+        storiesPage.basketballStory
+                .shouldBe(visible);
+//        WaitUtils.waitForVisibility(storiesPage.footballStory.shouldBe(visible));
+    }
 }
