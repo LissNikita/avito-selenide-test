@@ -2,12 +2,16 @@ package tests;
 
 import lombok.extern.log4j.Log4j2;
 import org.avito.models.CarData;
-import org.avito.pages.*;
-import org.avito.steps.CoreSteps;
-import org.avito.steps.SelectionModelsStep;
+import org.avito.pages.AudiSelectionPage;
+import org.avito.pages.AuthorizationPage;
+import org.avito.pages.MainPage;
+import org.avito.pages.StoriesPage;
+import org.avito.steps.CategoriesStep;
+import org.avito.steps.CoreStep;
+import org.avito.steps.ModelsOfCarStep;
 import org.avito.utils.JsonReader;
 import org.avito.utils.RetryUtils;
-import org.openqa.selenium.Keys;
+import org.avito.utils.Waiter;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -21,8 +25,9 @@ public class AvitoTest extends BaseTest {
     private AudiSelectionPage audiSelectionPage;
     private AuthorizationPage authorizationPage;
     private StoriesPage storiesPage;
-    private CoreSteps coreSteps;
-    private SelectionModelsStep selectionModelsStep;
+    private CoreStep coreStep;
+    private ModelsOfCarStep modelsOfCarStep;
+    private CategoriesStep categoriesStep;
 
 
     @BeforeClass
@@ -31,15 +36,16 @@ public class AvitoTest extends BaseTest {
         audiSelectionPage = new AudiSelectionPage();
         authorizationPage = new AuthorizationPage();
         storiesPage = new StoriesPage();
-        coreSteps = new CoreSteps();
-        selectionModelsStep = new SelectionModelsStep();
+        coreStep = new CoreStep();
+        modelsOfCarStep = new ModelsOfCarStep();
+        categoriesStep = new CategoriesStep();
     }
 
     @Test(dataProvider = "carNameData", dataProviderClass = JsonReader.class, retryAnalyzer = RetryUtils.class)
     public void findAudiCars(CarData carData) {
 
-        coreSteps.findAudiCar(carData.getCarName());
-        coreSteps.verifyTitle(coreSteps.getTITLE_BUY_AUDI());
+        coreStep.findAudiCar(carData.getCarName());
+        coreStep.verifyTitle(coreStep.getTITLE_BUY_AUDI());
     }
 
     @Test(retryAnalyzer = RetryUtils.class)
@@ -47,44 +53,35 @@ public class AvitoTest extends BaseTest {
 
         log.info("Check model of cars 'A4'");
 
-        coreSteps.findAudiCar(coreSteps.getAUDI());
-        selectionModelsStep.clickOnModelOfCar();
-        selectionModelsStep.clickOnCheckBoxModel();
-        selectionModelsStep.verifyContainerWithModelsVisible();
+        coreStep.findAudiCar(coreStep.getAUDI());
+        modelsOfCarStep.clickOnModelOfCar();
+        modelsOfCarStep.clickOnCheckBoxModel();
+        modelsOfCarStep.verifyContainerWithModelsVisible();
     }
 
     @Test(retryAnalyzer = RetryUtils.class)
     public void checkingSelectionFourWheelDriveCars() {
 
         log.info("Select four wheel driver cars");
-        mainPage.searchForm
-                .sendKeys("Audi", Keys.ENTER);
-        audiSelectionPage.buttonDriveOfCar
-                .scrollTo()
-                .click();
-        audiSelectionPage.buttonFilterSearch
-                .click();
-        mainPage.title
-                .scrollTo()
-                .shouldHave(text(": полный привод"));
+
+        coreStep.findAudiCar(coreStep.getAUDI());
+        modelsOfCarStep.clickOnButtonDriverOfCar();
+        modelsOfCarStep.clickOnButtonFilterSearch();
+        coreStep.verifyTitle(coreStep.getDRIVE_UNIT());
     }
 
     @Test(retryAnalyzer = RetryUtils.class)
     public void checkingSelectionOfManShoes() {
 
         log.info("Checking selection of man shoes");
-        mainPage.buttonAllCategories
-                .click();
-        mainPage.columnPersonalThings
-                .click();
-        mainPage.buttonManShoes
-                .click();
-        mainPage.title
-                .shouldHave(text("Мужская обувь"));
+        categoriesStep.clickOnButtonAllCategories();
+        categoriesStep.clickOnColumnPersonalThings();
+        categoriesStep.clickOnButtonManShoes();
+        coreStep.verifyTitle(coreStep.getMAN_SHOES());
     }
 
     @Test
-    public void checkBotProtection(){
+    public void checkBotProtection() {
         log.info("Check bot protection 'fail test for screenshot'");
 
         mainPage.loginButton
@@ -100,20 +97,16 @@ public class AvitoTest extends BaseTest {
     }
 
     @Test(retryAnalyzer = RetryUtils.class)
-    public void checkSwitchingStories(){
+    public void checkSwitchingStories() {
         log.info("Сhecking switching between stories");
 
         mainPage.buttonStories
                 .click();
         storiesPage.basketballStory
                 .shouldBe(visible);
-        try {
-            Thread.sleep(13000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        Waiter.sleep();
         storiesPage.footballStory
-                        .shouldBe(visible);
+                .shouldBe(visible);
     }
 
 //    @Test

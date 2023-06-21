@@ -1,7 +1,7 @@
 package org.avito.utils;
 
 import com.codeborne.selenide.SelenideElement;
-import io.github.bonigarcia.wdm.WebDriverManager;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -9,7 +9,17 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
-public class WaitUtils {
+@Log4j2
+public class Waiter {
+
+    public static void sleep() {
+        log.info("Sleep");
+        try {
+            Thread.sleep(13000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static void waitForVisibility(SelenideElement selenideElement) {
         new WebDriverWait(getWebDriver(), Duration.ofSeconds(13))

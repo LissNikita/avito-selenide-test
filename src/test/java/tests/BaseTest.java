@@ -1,17 +1,15 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.qameta.allure.selenide.LogType;
 import lombok.extern.log4j.Log4j2;
-import org.testng.annotations.AfterClass;
+import org.avito.utils.PropertyReader;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.avito.utils.PropertyReader;
 
 import java.util.logging.Level;
 
