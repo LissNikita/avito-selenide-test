@@ -15,13 +15,13 @@ public class FindPrice {
             throw new RuntimeException(e);
         }
 
-        ElementsCollection productPrices = $$(By.xpath("//strong[@class = 'styles-module-root-LIAav']"));
+        ElementsCollection productPrices = $$(By.xpath("//p[@data-marker = 'item-price']"));
 
         double lowestPrice = Double.MAX_VALUE;
         SelenideElement cheapestProduct = null;
 
         for (SelenideElement productPrice : productPrices) {
-            SelenideElement product = productPrice.closest("h3[contains(@itemprop, 'name')]");
+            SelenideElement product = productPrice.closest("//h3[contains(text(), 'iPhone 11')]");
             System.out.println(product.getText());
             String priceText = productPrice.getText().replace(" ₽", "").replace(" ", "");
             System.out.println(priceText);

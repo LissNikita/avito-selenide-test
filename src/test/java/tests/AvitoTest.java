@@ -1,11 +1,10 @@
 package tests;
 
+import io.qameta.allure.Issue;
 import lombok.extern.log4j.Log4j2;
 import org.avito.models.CarData;
-import org.avito.pages.AudiSelectionPage;
-import org.avito.pages.AuthorizationPage;
-import org.avito.pages.MainPage;
-import org.avito.pages.StoriesPage;
+import org.avito.models.UserData;
+import org.avito.steps.AuthorizationStep;
 import org.avito.steps.CategoriesStep;
 import org.avito.steps.CoreStep;
 import org.avito.steps.ModelsOfCarStep;
@@ -15,33 +14,22 @@ import org.avito.utils.Waiter;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
-
 @Log4j2
 public class AvitoTest extends BaseTest {
-
-    private MainPage mainPage;
-    private AudiSelectionPage audiSelectionPage;
-    private AuthorizationPage authorizationPage;
-    private StoriesPage storiesPage;
     private CoreStep coreStep;
     private ModelsOfCarStep modelsOfCarStep;
     private CategoriesStep categoriesStep;
-
+    private AuthorizationStep authorizationStep;
 
     @BeforeClass
     public void startPage() {
-        mainPage = new MainPage();
-        audiSelectionPage = new AudiSelectionPage();
-        authorizationPage = new AuthorizationPage();
-        storiesPage = new StoriesPage();
         coreStep = new CoreStep();
         modelsOfCarStep = new ModelsOfCarStep();
         categoriesStep = new CategoriesStep();
+        authorizationStep = new AuthorizationStep();
     }
 
-    @Test(dataProvider = "carNameData", dataProviderClass = JsonReader.class, retryAnalyzer = RetryUtils.class)
+    @Test(dataProvider = "carData", dataProviderClass = JsonReader.class, retryAnalyzer = RetryUtils.class)
     public void findAudiCars(CarData carData) {
 
         coreStep.findAudiCar(carData.getCarName());
@@ -80,44 +68,25 @@ public class AvitoTest extends BaseTest {
         coreStep.verifyTitle(coreStep.getMAN_SHOES());
     }
 
-    @Test
-    public void checkBotProtection() {
+    @Issue("Element not found")
+    @Test(dataProvider = "userData", dataProviderClass = JsonReader.class)
+    public void checkBotProtection(UserData userData) {
         log.info("Check bot protection 'fail test for screenshot'");
 
-        mainPage.loginButton
-                .click();
-        authorizationPage.accountLogin
-                .sendKeys("+1234567");
-        authorizationPage.accountPassword
-                .sendKeys("1234567");
-        authorizationPage.buttonEnter
-                .click();
-        authorizationPage.messageError
-                .shouldHave(text("Укажите мобильный телефон"));
+        coreStep.clickOnLoginButton();
+        authorizationStep.setLogin(userData.getLogin());
+        authorizationStep.setPassword(userData.getPassword());
+        authorizationStep.clickOnButtonEnter();
+        authorizationStep.verifyMessageError(authorizationStep.getERROR_MESSAGE());
     }
 
     @Test(retryAnalyzer = RetryUtils.class)
     public void checkSwitchingStories() {
         log.info("Сhecking switching between stories");
 
-        mainPage.buttonStories
-                .click();
-        storiesPage.basketballStory
-                .shouldBe(visible);
+        coreStep.clickOnStoriesButton();
+        coreStep.verifyTitleOfStoryBasketball();
         Waiter.sleep();
-        storiesPage.footballStory
-                .shouldBe(visible);
+        coreStep.verifyTitleOfStoryFootball();
     }
-
-//    @Test
-//    public void cheapestPrise(){
-//
-//        mainPage.buttonElectronics
-//                .click();
-//        electronicsPage.iPhone11
-//                .click();
-//        SelenideElement cheapestProduct = FindPrice.findCheapestPrise();
-//        String productName = cheapestProduct.find("item-title").getText();
-//        System.out.println(productName);
-//    }
 }
