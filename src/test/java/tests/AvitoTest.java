@@ -1,23 +1,92 @@
 package tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+import io.qameta.allure.Issue;
+import lombok.extern.log4j.Log4j2;
+import org.avito.models.CarData;
+import org.avito.models.UserData;
+import org.avito.steps.AuthorizationStep;
+import org.avito.steps.CategoriesStep;
+import org.avito.steps.CoreStep;
+import org.avito.steps.ModelsOfCarStep;
+import org.avito.utils.JsonReader;
+import org.avito.utils.RetryUtils;
+import org.avito.utils.Waiter;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+@Log4j2
+public class AvitoTest extends BaseTest {
+    private CoreStep coreStep;
+    private ModelsOfCarStep modelsOfCarStep;
+    private CategoriesStep categoriesStep;
+    private AuthorizationStep authorizationStep;
 
-public class AvitoTest {
+    @BeforeClass
+    public void startPage() {
+        coreStep = new CoreStep();
+        modelsOfCarStep = new ModelsOfCarStep();
+        categoriesStep = new CategoriesStep();
+        authorizationStep = new AuthorizationStep();
+    }
 
-    @Test
-    public void findProduct() {
+    @Test(dataProvider = "carData", dataProviderClass = JsonReader.class, retryAnalyzer = RetryUtils.class)
+    public void findAudiCars(CarData carData) {
 
-        open("https://www.avito.ru/");
+        coreStep.findAudiCar(carData.getCarName());
+        coreStep.verifyTitle(coreStep.getTITLE_BUY_AUDI());
+    }
 
-        $(By.xpath("//label[@class='input-layout-input-layout-_HVr_ input-layout-size-s-COZ10 input-layout-text-align-left-U2OZJ width-width-12-_MkqF suggest-input-X6pqt js-react-suggest']"))
-                .sendKeys("Audi", Keys.ENTER);
-        $(By.xpath("//h1[@class='page-title-text-tSffu page-title-inline-zBPFx']")).shouldHave(text("Купить Audi"));
+    @Test(retryAnalyzer = RetryUtils.class)
+    public void checkingModelOfCars() {
 
+        log.info("Check model of cars 'A4'");
+
+        coreStep.findAudiCar(coreStep.getAUDI());
+        modelsOfCarStep.clickOnModelOfCar();
+        modelsOfCarStep.clickOnCheckBoxModel();
+        modelsOfCarStep.verifyContainerWithModelsVisible();
+    }
+
+    @Test(retryAnalyzer = RetryUtils.class)
+    public void checkingSelectionFourWheelDriveCars() {
+
+        log.info("Select four wheel driver cars");
+
+        coreStep.findAudiCar(coreStep.getAUDI());
+        modelsOfCarStep.clickOnButtonDriverOfCar();
+        modelsOfCarStep.clickOnButtonFilterSearch();
+        coreStep.verifyTitle(coreStep.getDRIVE_UNIT());
+    }
+
+    @Test(retryAnalyzer = RetryUtils.class)
+    public void checkingSelectionOfManShoes() {
+
+        log.info("Checking selection of man shoes");
+        categoriesStep.clickOnButtonAllCategories();
+        categoriesStep.clickOnColumnPersonalThings();
+        categoriesStep.clickOnButtonManShoes();
+        coreStep.verifyTitle(coreStep.getMAN_SHOES());
+    }
+
+    @Issue("Element not found")
+    @Test(dataProvider = "userData", dataProviderClass = JsonReader.class)
+    public void checkBotProtection(UserData userData) {
+        log.info("Check bot protection 'fail test for screenshot'");
+
+        coreStep.clickOnLoginButton();
+        authorizationStep.setLogin(userData.getLogin());
+        authorizationStep.setPassword(userData.getPassword());
+        authorizationStep.clickOnButtonEnter();
+        authorizationStep.verifyMessageError(authorizationStep.getERROR_MESSAGE());
+    }
+
+    @Test(retryAnalyzer = RetryUtils.class)
+    public void checkSwitchingStories() {
+        log.info("Сhecking switching between stories");
+
+        coreStep.clickOnStoriesButton();
+        coreStep.verifyTitleOfStoryBasketball();
+        Waiter.sleep();
+        coreStep.verifyTitleOfStoryFootball();
     }
 }
