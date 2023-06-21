@@ -19,7 +19,7 @@ public class SelectionModelsStep {
     }
 
     public void clickOnCheckBoxModel(){
-        log.info("Click on check box model");
+        log.info("Click on check box model 'A4'");
         audiSelectionPage.checkBoxModel
                 .scrollTo()
                 .click();

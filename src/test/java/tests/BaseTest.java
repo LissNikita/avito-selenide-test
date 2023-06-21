@@ -8,16 +8,19 @@ import io.qameta.allure.selenide.AllureSelenide;
 import io.qameta.allure.selenide.LogType;
 import lombok.extern.log4j.Log4j2;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.avito.utils.PropertyReader;
 
 import java.util.logging.Level;
 
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 @Log4j2
 abstract public class BaseTest {
+
+    private final String URL = PropertyReader.getPropertyValue("URL");
 
     @BeforeClass
     public void setUp() {
@@ -36,14 +39,15 @@ abstract public class BaseTest {
     @BeforeMethod
     public void init() {
         log.info("BEFORE METHOD");
-        open(PropertyReader.getPropertyValue("URL"));
+        open(URL);
         setUp();
     }
 
-    @AfterClass
+    @AfterMethod
     public void tearDown() {
         log.info("AFTER CLASS");
-        Selenide.closeWebDriver();
+        clearBrowserLocalStorage();
+        clearBrowserCookies();
     }
 
 }
