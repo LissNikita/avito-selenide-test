@@ -1,2 +1,2 @@
-# wildberries-selenid-test
+# avito-selenid-test
  
