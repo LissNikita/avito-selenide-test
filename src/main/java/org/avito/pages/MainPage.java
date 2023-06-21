@@ -19,4 +19,6 @@ public class MainPage {
     public SelenideElement loginButton = $x("//a[@class = 'index-nav-link-muv1u index-login-NV2z_']");
 
     public SelenideElement buttonStories = $x("//div[@data-id = '984']");
+
+    public SelenideElement buttonElectronics = $x("//img[@alt = 'Электроника']");
 }

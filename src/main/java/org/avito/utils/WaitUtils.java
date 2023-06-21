@@ -7,15 +7,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+
 public class WaitUtils {
 
     public static void waitForVisibility(SelenideElement selenideElement) {
-        new WebDriverWait(WebDriverManager.chromedriver().create(), Duration.ofSeconds(13))
+        new WebDriverWait(getWebDriver(), Duration.ofSeconds(13))
                 .until(ExpectedConditions.visibilityOf(selenideElement));
     }
 
     public static void waitForClickable(SelenideElement selenideElement) {
-        new WebDriverWait(WebDriverManager.chromedriver().create(), Duration.ofSeconds(13))
+        new WebDriverWait(getWebDriver(), Duration.ofSeconds(13))
                 .until(ExpectedConditions.elementToBeClickable(selenideElement));
     }
 }

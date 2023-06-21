@@ -1,12 +1,12 @@
 package tests;
 
 import lombok.extern.log4j.Log4j2;
-import org.avito.pages.AudiSelectionPage;
-import org.avito.pages.AuthorizationPage;
-import org.avito.pages.MainPage;
-import org.avito.pages.StoriesPage;
+import org.avito.models.CarData;
+import org.avito.pages.*;
+import org.avito.steps.CoreSteps;
+import org.avito.steps.SelectionModelsStep;
+import org.avito.utils.JsonReader;
 import org.avito.utils.RetryUtils;
-import org.avito.utils.WaitUtils;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -21,6 +21,9 @@ public class AvitoTest extends BaseTest {
     private AudiSelectionPage audiSelectionPage;
     private AuthorizationPage authorizationPage;
     private StoriesPage storiesPage;
+    private CoreSteps coreSteps;
+    private SelectionModelsStep selectionModelsStep;
+
 
     @BeforeClass
     public void startPage() {
@@ -28,39 +31,34 @@ public class AvitoTest extends BaseTest {
         audiSelectionPage = new AudiSelectionPage();
         authorizationPage = new AuthorizationPage();
         storiesPage = new StoriesPage();
+        coreSteps = new CoreSteps();
+        selectionModelsStep = new SelectionModelsStep();
     }
 
-    @Test(retryAnalyzer = RetryUtils.class)
-    public void findAudiCars() {
+    @Test(dataProvider = "carNameData", dataProviderClass = JsonReader.class, retryAnalyzer = RetryUtils.class)
+    public void findAudiCars(CarData carData) {
 
-        log.info("Find Audi cars");
-
-        mainPage.searchForm
-                .sendKeys("Audi", Keys.ENTER);
-        mainPage.title
-                .shouldHave(text("Купить Audi"));
+        coreSteps.findAudiCar(carData.getCarName());
+        coreSteps.verifyTitle(coreSteps.getTITLE_BUY_AUDI());
     }
 
     @Test(retryAnalyzer = RetryUtils.class)
     public void checkingModelOfCars() {
 
         log.info("Check model of cars 'A4'");
-        findAudiCars();
-        audiSelectionPage.modelOfCar
-                .scrollTo()
-                .click();
-        audiSelectionPage.checkBoxModel
-                .scrollTo()
-                .click();
-        audiSelectionPage.containerWithModels
-                .shouldBe(visible);
+
+        coreSteps.findAudiCar(coreSteps.getAUDI());
+        selectionModelsStep.clickOnModelOfCar();
+        selectionModelsStep.clickOnCheckBoxModel();
+        selectionModelsStep.verifyContainerWithModelsVisible();
     }
 
     @Test(retryAnalyzer = RetryUtils.class)
     public void checkingSelectionFourWheelDriveCars() {
 
         log.info("Select four wheel driver cars");
-        findAudiCars();
+        mainPage.searchForm
+                .sendKeys("Audi", Keys.ENTER);
         audiSelectionPage.buttonDriveOfCar
                 .scrollTo()
                 .click();
@@ -85,7 +83,7 @@ public class AvitoTest extends BaseTest {
                 .shouldHave(text("Мужская обувь"));
     }
 
-    @Test(retryAnalyzer = RetryUtils.class)
+    @Test
     public void checkBotProtection(){
         log.info("Check bot protection 'fail test for screenshot'");
 
@@ -109,6 +107,24 @@ public class AvitoTest extends BaseTest {
                 .click();
         storiesPage.basketballStory
                 .shouldBe(visible);
-//        WaitUtils.waitForVisibility(storiesPage.footballStory.shouldBe(visible));
+        try {
+            Thread.sleep(13000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        storiesPage.footballStory
+                        .shouldBe(visible);
     }
+
+//    @Test
+//    public void cheapestPrise(){
+//
+//        mainPage.buttonElectronics
+//                .click();
+//        electronicsPage.iPhone11
+//                .click();
+//        SelenideElement cheapestProduct = FindPrice.findCheapestPrise();
+//        String productName = cheapestProduct.find("item-title").getText();
+//        System.out.println(productName);
+//    }
 }

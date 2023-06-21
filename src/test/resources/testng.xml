@@ -11,6 +11,7 @@
                     <include name="checkingSelectionOfManShoes"/>
                     <include name="checkBotProtection"/>
                     <include name="checkingSelectionOfManShoes"/>
+                    <include name="checkSwitchingStories"/>
                 </methods>
             </class>
         </classes>
