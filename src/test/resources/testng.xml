@@ -6,11 +6,11 @@
             <class name="tests.AvitoTest">
                 <methods>
                     <include name="findAudiCars"/>
-                    <include name="checkingModelOfCars"/>
-                    <include name="checkingSelectionFourWheelDriveCars"/>
-                    <include name="checkingSelectionOfManShoes"/>
-                    <include name="checkBotProtection"/>
-                    <include name="checkSwitchingStories"/>
+                    <include name="modelOfCars"/>
+                    <include name="fourWheelDriveCars"/>
+                    <include name="manShoes"/>
+                    <include name="botProtection"/>
+                    <include name="switchingStories"/>
                 </methods>
             </class>
         </classes>

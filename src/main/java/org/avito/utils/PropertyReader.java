@@ -9,6 +9,7 @@ import java.util.Properties;
 
 public class PropertyReader {
     public static String getPropertyValue(String propertyName) {
+
         Properties properties = new Properties();
 
         try (InputStream inputStream = new FileInputStream("src/main/resources/properties.properties")) {

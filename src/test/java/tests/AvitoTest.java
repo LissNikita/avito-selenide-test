@@ -11,36 +11,30 @@ import org.avito.steps.ModelsOfCarStep;
 import org.avito.utils.JsonReader;
 import org.avito.utils.RetryUtils;
 import org.avito.utils.Waiter;
+import org.checkerframework.checker.units.qual.C;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 @Log4j2
 public class AvitoTest extends BaseTest {
-    private CoreStep coreStep;
-    private ModelsOfCarStep modelsOfCarStep;
-    private CategoriesStep categoriesStep;
-    private AuthorizationStep authorizationStep;
 
-    @BeforeClass
-    public void startPage() {
-        coreStep = new CoreStep();
-        modelsOfCarStep = new ModelsOfCarStep();
-        categoriesStep = new CategoriesStep();
-        authorizationStep = new AuthorizationStep();
-    }
+    private CoreStep coreStep = new CoreStep();
+    private ModelsOfCarStep modelsOfCarStep = new ModelsOfCarStep();
+    private CategoriesStep categoriesStep = new CategoriesStep();
+    private AuthorizationStep authorizationStep = new AuthorizationStep();
 
     @Test(dataProvider = "carData", dataProviderClass = JsonReader.class, retryAnalyzer = RetryUtils.class)
     public void findAudiCars(CarData carData) {
 
+        log.info("Find audi cars");
         coreStep.findAudiCar(carData.getCarName());
         coreStep.verifyTitle(coreStep.getTITLE_BUY_AUDI());
     }
 
     @Test(retryAnalyzer = RetryUtils.class)
-    public void checkingModelOfCars() {
+    public void modelOfCars() {
 
         log.info("Check model of cars 'A4'");
-
         coreStep.findAudiCar(coreStep.getAUDI());
         modelsOfCarStep.clickOnModelOfCar();
         modelsOfCarStep.clickOnCheckBoxModel();
@@ -48,10 +42,9 @@ public class AvitoTest extends BaseTest {
     }
 
     @Test(retryAnalyzer = RetryUtils.class)
-    public void checkingSelectionFourWheelDriveCars() {
+    public void fourWheelDriveCars() {
 
         log.info("Select four wheel driver cars");
-
         coreStep.findAudiCar(coreStep.getAUDI());
         modelsOfCarStep.clickOnButtonDriverOfCar();
         modelsOfCarStep.clickOnButtonFilterSearch();
@@ -59,7 +52,7 @@ public class AvitoTest extends BaseTest {
     }
 
     @Test(retryAnalyzer = RetryUtils.class)
-    public void checkingSelectionOfManShoes() {
+    public void manShoes() {
 
         log.info("Checking selection of man shoes");
         categoriesStep.clickOnButtonAllCategories();
@@ -70,20 +63,20 @@ public class AvitoTest extends BaseTest {
 
     @Issue("Element not found")
     @Test(dataProvider = "userData", dataProviderClass = JsonReader.class)
-    public void checkBotProtection(UserData userData) {
-        log.info("Check bot protection 'fail test for screenshot'");
+    public void botProtection(UserData userData) {
 
+        log.info("Check bot protection 'fail test for screenshot'");
         coreStep.clickOnLoginButton();
         authorizationStep.setLogin(userData.getLogin());
         authorizationStep.setPassword(userData.getPassword());
         authorizationStep.clickOnButtonEnter();
-        authorizationStep.verifyMessageError(authorizationStep.getERROR_MESSAGE());
+        authorizationStep.verifyMessageError(authorizationStep.getINVALID_PHONE_MESSAGE());
     }
 
     @Test(retryAnalyzer = RetryUtils.class)
-    public void checkSwitchingStories() {
-        log.info("Сhecking switching between stories");
+    public void switchingStories() {
 
+        log.info("Сhecking switching between stories");
         coreStep.clickOnStoriesButton();
         coreStep.verifyTitleOfStoryBasketball();
         Waiter.sleep();

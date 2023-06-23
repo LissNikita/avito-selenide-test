@@ -6,5 +6,7 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class ElectronicsPage {
 
-    public SelenideElement iPhone11 = $x("//span[text() = 'iPhone 11']");
+    private final String iPhone = "iPhone 11";
+
+    public SelenideElement iPhone11 = $x("//span[text() = '" + iPhone + "']");
 }

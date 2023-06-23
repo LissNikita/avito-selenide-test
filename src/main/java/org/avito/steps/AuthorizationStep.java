@@ -13,11 +13,11 @@ public class AuthorizationStep {
 
     AuthorizationPage authorizationPage = new AuthorizationPage();
 
-    private final String ERROR_MESSAGE = "Укажите мобильный телефон";
+    private final String INVALID_PHONE_MESSAGE = "Укажите мобильный телефон";
 
-    @Step("Set login(unsuccessful)")
+    @Step("Set login")
     public void setLogin(String login) {
-        log.info("Set login(unsuccessful)");
+        log.info("Set login");
         authorizationPage.accountLogin
                 .sendKeys(login);
     }

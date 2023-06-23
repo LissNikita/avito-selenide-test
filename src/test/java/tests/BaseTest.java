@@ -23,7 +23,6 @@ abstract public class BaseTest {
     @BeforeClass
     public void setUp() {
         log.info("BEFORE CLASS");
-        WebDriverManager.chromedriver().setup();
         Configuration.browser = "chrome";
         Configuration.driverManagerEnabled = true;
         Configuration.browserSize = "1920x1080";
@@ -38,7 +37,6 @@ abstract public class BaseTest {
     public void init() {
         log.info("BEFORE METHOD");
         open(URL);
-        setUp();
     }
 
     @AfterMethod
