@@ -14,18 +14,20 @@ public class AuthorizationStep {
     AuthorizationPage authorizationPage = new AuthorizationPage();
 
     private final String INVALID_PHONE_MESSAGE = "Укажите мобильный телефон";
+    private final String LOGIN = "login";
+    private final String PASSWORD = "password";
 
     @Step("Set login")
     public void setLogin(String login) {
         log.info("Set login");
-        authorizationPage.accountLogin
+        authorizationPage.accountLogin(LOGIN)
                 .sendKeys(login);
     }
 
     @Step("Set password(unsuccessful)")
     public void setPassword(String password) {
         log.info("Set password(unsuccessful)");
-        authorizationPage.accountPassword
+        authorizationPage.accountPassword(PASSWORD)
                 .sendKeys(password);
     }
 

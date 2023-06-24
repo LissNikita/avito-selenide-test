@@ -9,6 +9,9 @@ public class CategoriesStep {
 
     MainPage mainPage = new MainPage();
 
+    private final String OWN_THINGS = "Личные вещи";
+    private final String MAN_SHOES = "Мужская обувь";
+
     @Step("Click on button all categories")
     public void clickOnButtonAllCategories() {
         log.info("Click on button all categories");
@@ -19,14 +22,14 @@ public class CategoriesStep {
     @Step("Click on column personal things")
     public void clickOnColumnPersonalThings() {
         log.info("Click on column personal things");
-        mainPage.columnPersonalThings
+        mainPage.columnPersonalThings(OWN_THINGS)
                 .click();
     }
 
     @Step("Click on button man shoes")
     public void clickOnButtonManShoes() {
         log.info("Click on button man shoes");
-        mainPage.buttonManShoes
+        mainPage.buttonManShoes(MAN_SHOES)
                 .click();
     }
 }

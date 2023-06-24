@@ -13,6 +13,7 @@ import static com.codeborne.selenide.Condition.visible;
 @Data
 @Log4j2
 public class CoreStep {
+
     MainPage mainPage = new MainPage();
     StoriesPage storiesPage = new StoriesPage();
 
@@ -20,6 +21,8 @@ public class CoreStep {
     private final String AUDI = "Audi";
     private final String DRIVE_UNIT = ": полный привод";
     private final String MAN_SHOES = "Мужская обувь";
+    private final String BALLS_FOR_BASKETBALL = "Мячи для баскетбола";
+    private final String BALLS_FOR_FOOTBALL = "Мячи для футбола";
 
     @Step("Find audi car")
     public void findAudiCar(String carName) {
@@ -52,14 +55,14 @@ public class CoreStep {
     @Step("Verify tittle of story (basketball)")
     public void verifyTitleOfStoryBasketball() {
         log.info("Verify tittle of story (basketball)");
-        storiesPage.basketballStory
+        storiesPage.basketballStory(BALLS_FOR_BASKETBALL)
                 .shouldBe(visible);
     }
 
     @Step("Verify tittle of story (football)")
     public void verifyTitleOfStoryFootball() {
         log.info("Verify tittle of story (football)");
-        storiesPage.footballStory
+        storiesPage.footballStory(BALLS_FOR_FOOTBALL)
                 .shouldBe(visible);
     }
 }

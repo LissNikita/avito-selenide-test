@@ -11,10 +11,14 @@ public class ModelsOfCarStep {
 
     AudiSelectionPage audiSelectionPage = new AudiSelectionPage();
 
+    private final String A4 = "A4";
+    private final String DRIVE = "полный";
+    private final String ANY = "Любая";
+
     @Step("Click on model of car")
     public void clickOnModelOfCar() {
         log.info("Click on model of car");
-        audiSelectionPage.modelOfCar
+        audiSelectionPage.modelOfCar(ANY)
                 .scrollTo()
                 .click();
     }
@@ -22,7 +26,7 @@ public class ModelsOfCarStep {
     @Step("Click on check box model 'A4'")
     public void clickOnCheckBoxModel() {
         log.info("Click on check box model 'A4'");
-        audiSelectionPage.checkBoxModel
+        audiSelectionPage.checkBoxModel(A4)
                 .scrollTo()
                 .click();
     }
@@ -37,7 +41,7 @@ public class ModelsOfCarStep {
     @Step("Click on button driver of car 'FULL'")
     public void clickOnButtonDriverOfCar() {
         log.info("Click on button driver of car 'FULL'");
-        audiSelectionPage.buttonDriveOfCar
+        audiSelectionPage.buttonDriveOfCar(DRIVE)
                 .scrollTo()
                 .click();
     }
@@ -45,7 +49,7 @@ public class ModelsOfCarStep {
     @Step("Click on button filter search")
     public void clickOnButtonFilterSearch() {
         log.info("Click on button filter search");
-        audiSelectionPage.buttonDriveOfCar
+        audiSelectionPage.buttonDriveOfCar(DRIVE)
                 .click();
     }
 }

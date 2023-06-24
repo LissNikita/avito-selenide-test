@@ -6,11 +6,17 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class AudiSelectionPage {
 
-    private final String A4 = "A4";
-    private final String DRIVE = "полный";
-    private final String ANY = "Любая";
-    public SelenideElement modelOfCar = $x("//span[contains(text(), 'Модель')]//following::span[contains(text(), '" + ANY + "')]");
-    public SelenideElement checkBoxModel = $x("//p[text() = '"+ A4 + "']");
+    public SelenideElement checkBoxModel(String modelA4) {
+        return $x("//p[text() = '" + modelA4 + "']");
+    }
+
+    public SelenideElement buttonDriveOfCar(String modelOfDrive) {
+        return $x("//li[@title = '" + modelOfDrive + "']");
+    }
+
+    public SelenideElement modelOfCar(String anyModel) {
+        return $x("//span[contains(text(), 'Модель')]//following::span[contains(text(), '" + anyModel + "')]");
+    }
+
     public SelenideElement containerWithModels = $x("//div[@class = 'styles-gapContainer-_bE0D']");
-    public SelenideElement buttonDriveOfCar = $x("//li[@title = '" + DRIVE + "']");
 }
