@@ -15,19 +15,18 @@ public class Waiter {
     public static void sleep() {
         log.info("Sleep");
         try {
-            Thread.sleep(13000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static void waitForVisibility(SelenideElement selenideElement) {
-        new WebDriverWait(getWebDriver(), Duration.ofSeconds(13))
-                .until(ExpectedConditions.visibilityOf(selenideElement));
-    }
-
-    public static void waitForClickable(SelenideElement selenideElement) {
-        new WebDriverWait(getWebDriver(), Duration.ofSeconds(13))
-                .until(ExpectedConditions.elementToBeClickable(selenideElement));
+    public static void sleep(long millis) {
+        log.info("Sleep");
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
