@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test name="Avito Tests">
+        <classes>
+            <class name="tests.AvitoTest">
+                <methods>
+                    <include name="findAudiCars"/>
+                    <include name="modelOfCars"/>
+                    <include name="fourWheelDriveCars"/>
+                    <include name="manShoes"/>
+                    <include name="botProtection"/>
+                    <include name="switchingStories"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
