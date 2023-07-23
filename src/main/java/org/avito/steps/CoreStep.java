@@ -21,8 +21,8 @@ public class CoreStep {
     private final String AUDI = "Audi";
     private final String DRIVE_UNIT = ": полный привод";
     private final String MAN_SHOES = "Мужская обувь";
-    private final String BALLS_FOR_BASKETBALL = "Мячи для баскетбола";
-    private final String BALLS_FOR_FOOTBALL = "Мячи для футбола";
+    private final String HELP_LIZA_ALERT = "Помогите «ЛизаАлерт»";
+    private final String WHO_IS_LOOKING_FOR_NEAR_YOU = "Кого ищут рядом с вами";
 
     @Step("Find audi car")
     public void findAudiCar(String carName) {
@@ -52,17 +52,17 @@ public class CoreStep {
                 .click();
     }
 
-    @Step("Verify tittle of story (basketball)")
-    public void verifyTitleOfStoryBasketball() {
-        log.info("Verify tittle of story (basketball)");
-        storiesPage.basketballStory(BALLS_FOR_BASKETBALL)
+    @Step("Verify tittle of story (LizaAlert)")
+    public void verifyTitleOfStoryHelpLizaAlert() {
+        log.info("Verify tittle of story (LizaAlert)");
+        storiesPage.basketballStory(HELP_LIZA_ALERT)
                 .shouldBe(visible);
     }
 
-    @Step("Verify tittle of story (football)")
-    public void verifyTitleOfStoryFootball() {
-        log.info("Verify tittle of story (football)");
-        storiesPage.footballStory(BALLS_FOR_FOOTBALL)
+    @Step("Verify tittle of story (Who is looking for near you)")
+    public void verifyTitleOfStoryWhoIsLookingForNearYou() {
+        log.info("Verify tittle of story (Who is looking for near you)");
+        storiesPage.footballStory(WHO_IS_LOOKING_FOR_NEAR_YOU)
                 .shouldBe(visible);
     }
 }

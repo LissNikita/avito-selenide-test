@@ -78,8 +78,8 @@ public class AvitoTest extends BaseTest {
 
         log.info("Сhecking switching between stories");
         coreStep.clickOnStoriesButton();
-        coreStep.verifyTitleOfStoryBasketball();
+        coreStep.verifyTitleOfStoryHelpLizaAlert();
         Waiter.sleep(13000);
-        coreStep.verifyTitleOfStoryFootball();
+        coreStep.verifyTitleOfStoryWhoIsLookingForNearYou();
     }
 }

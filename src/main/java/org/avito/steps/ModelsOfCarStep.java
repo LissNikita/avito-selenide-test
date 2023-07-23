@@ -49,7 +49,7 @@ public class ModelsOfCarStep {
     @Step("Click on button filter search")
     public void clickOnButtonFilterSearch() {
         log.info("Click on button filter search");
-        audiSelectionPage.buttonDriveOfCar(DRIVE)
+        audiSelectionPage.filterButton
                 .click();
     }
 }

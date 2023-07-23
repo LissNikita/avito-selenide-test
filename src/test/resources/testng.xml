@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite" parallel="tests" thread-count="2">
+<suite name="All Test Suite">
     <test name="Avito main tests">
 
-        <parameter name="startType" value="selenoid"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="version" value="latest"/>
+        <parameter name="startType" value="local"/>
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="version" value="latest"/>-->
 
         <classes>
             <class name="tests.AvitoTest">
@@ -15,20 +15,6 @@
                     <include name="fourWheelDriveCars"/>
                     <include name="manShoes"/>
                     <include name="botProtection"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="Avito stories test">
-
-        <parameter name="startType" value="selenoid"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="version" value="latest"/>
-
-        <classes>
-            <class name="tests.AvitoTest">
-                <methods>
                     <include name="switchingStories"/>
                 </methods>
             </class>

@@ -18,5 +18,7 @@ public class AudiSelectionPage {
         return $x("//span[contains(text(), 'Модель')]//following::span[contains(text(), '" + anyModel + "')]");
     }
 
+    public SelenideElement filterButton = $x("//div[@class = 'styles-box-Up_E3']");
+
     public SelenideElement containerWithModels = $x("//div[@class = 'styles-gapContainer-_bE0D']");
 }
