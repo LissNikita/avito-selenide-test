@@ -11,8 +11,6 @@ import org.avito.steps.ModelsOfCarStep;
 import org.avito.utils.JsonReader;
 import org.avito.utils.RetryUtils;
 import org.avito.utils.Waiter;
-import org.checkerframework.checker.units.qual.C;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 @Log4j2
