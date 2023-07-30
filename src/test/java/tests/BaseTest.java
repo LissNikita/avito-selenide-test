@@ -7,7 +7,10 @@ import io.qameta.allure.selenide.LogType;
 import lombok.extern.log4j.Log4j2;
 import org.avito.utils.PropertyReader;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +23,7 @@ abstract public class BaseTest {
 
     private final String URL = PropertyReader.getPropertyValue("URL");
 
-    @BeforeClass
+    @BeforeMethod
     @Parameters({"startType", "browser", "version"})
     public void setUp(String statType,
                       @Optional("browser") String browser,
@@ -30,10 +33,6 @@ abstract public class BaseTest {
         } else if (statType.equals("selenoid")) {
             startSelenoid(browser, version);
         }
-    }
-
-    @BeforeMethod
-    public void init() {
         log.info("BEFORE METHOD");
         open(URL);
     }
